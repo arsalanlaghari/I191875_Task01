@@ -1,0 +1,28 @@
+name: Build Branches
+
+on:
+  push:
+    branches:
+      - branch-1
+      - branch-2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build branch
+        run: |
+          if [[ ${{ github.ref }} == 'refs/heads/branch-1' ]]; then
+            echo "Building branch-1"
+            # Add your build commands for branch-1 here
+          elif [[ ${{ github.ref }} == 'refs/heads/branch-2' ]]; then
+            echo "Building branch-2"
+            # Add your build commands for branch-2 here
+          else
+            echo "Invalid branch"
+            exit 1
+          fi
